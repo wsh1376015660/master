@@ -49,4 +49,8 @@ public class LoginController {
     }
 
 
+    public void clear(ActionEvent actionEvent) {
+        usernameTextfield.setText("");
+        passwordField.setText("");
+    }
 }
