@@ -1,6 +1,6 @@
 package domain;
 
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleStringProperty;      //使用SimpleStringProperty类建立视图层与java类的双向监听
 
 public class Course {
     private final SimpleStringProperty cID;

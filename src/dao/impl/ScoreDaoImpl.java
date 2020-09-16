@@ -91,7 +91,7 @@ public class ScoreDaoImpl implements IScoreDao {
             conn = JdbcUtil.getConn();
             st = conn.createStatement();
             String sql = "select * from score ";
-            System.out.println(sql);
+//            System.out.println(sql);
             rs = st.executeQuery(sql);
             ArrayList list = new ArrayList();
 

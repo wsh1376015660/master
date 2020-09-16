@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import util.JdbcUtil;
 
-public class CourseDaoImpl implements ICourseDao {
+public class CourseDaoImpl implements ICourseDao {      //实现ICourseDao
     public CourseDaoImpl() {
     }
 
@@ -51,7 +51,7 @@ public class CourseDaoImpl implements ICourseDao {
     public void update(int cId, Course course) {
         String sql = "update course set cMajor=?, cName=?, cType=?, cStartTerm=?,cPeriod=?, cCredit=? where cID =? ";
         this.executeUpdate(sql, course.getcMajor(), course.getcName(), course.getcType(), course.getcStartTerm(), course.getcPeriod(), course.getcCredit(), course.getcID());
-        System.out.println(sql);
+//        System.out.println(sql);
     }
 
     public Course get(int cId) {
@@ -91,7 +91,7 @@ public class CourseDaoImpl implements ICourseDao {
             conn = JdbcUtil.getConn();
             st = conn.createStatement();
             String sql = "select * from course ";
-            System.out.println(sql);
+//            System.out.println(sql);
             rs = st.executeQuery(sql);
             ArrayList list = new ArrayList();
 

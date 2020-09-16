@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -40,8 +41,8 @@
                                                                 <VBox alignment="CENTER" prefHeight="518.0" prefWidth="297.0" spacing="27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
                                                                     <children>
                                                                         <Button mnemonicParsing="false" onAction="#addStudent" prefHeight="40.0" prefWidth="115.0" text="添加学生" />
-                                                                        <Button mnemonicParsing="false" onAction="#changeStu" prefHeight="40.0" prefWidth="115.0" text="修改信息" />
                                                                         <Button mnemonicParsing="false" onAction="#deleteStu" prefHeight="40.0" prefWidth="115.0" text="删除学生" />
+                                                                        <Button mnemonicParsing="false" onAction="#changeStu" prefHeight="40.0" prefWidth="115.0" text="修改信息" />
                                                                         <Button mnemonicParsing="false" onAction="#queryStu" prefHeight="40.0" prefWidth="115.0" text="查询信息" />
                                                                     </children>
                                                                     <opaqueInsets>
@@ -59,8 +60,8 @@
                                                                 <VBox alignment="CENTER" prefHeight="462.0" prefWidth="250.0" spacing="27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <children>
                                                                         <Button mnemonicParsing="false" onAction="#addCourse" prefHeight="40.0" prefWidth="115.0" text="添加课程" />
-                                                                        <Button mnemonicParsing="false" onAction="#changeCourse" prefHeight="40.0" prefWidth="115.0" text="修改课程" />
                                                                         <Button mnemonicParsing="false" onAction="#deleteCourse" prefHeight="40.0" prefWidth="115.0" text="删除课程" />
+                                                                        <Button mnemonicParsing="false" onAction="#changeCourse" prefHeight="40.0" prefWidth="115.0" text="修改课程" />
                                                                     </children>
                                                                 </VBox>
                                                             </children>
@@ -74,8 +75,8 @@
                                                                 <VBox alignment="CENTER" prefHeight="462.0" prefWidth="250.0" spacing="27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <children>
                                                                         <Button mnemonicParsing="false" onAction="#addScore" prefHeight="40.0" prefWidth="115.0" text="添加成绩" />
-                                                                        <Button mnemonicParsing="false" onAction="#changeScore" prefHeight="40.0" prefWidth="115.0" text="修改成绩" />
                                                                         <Button mnemonicParsing="false" onAction="#deleteScore" prefHeight="40.0" prefWidth="115.0" text="删除成绩" />
+                                                                        <Button mnemonicParsing="false" onAction="#changeScore" prefHeight="40.0" prefWidth="115.0" text="修改成绩" />
                                                                     </children>
                                                                 </VBox>
                                                             </children>
@@ -94,10 +95,10 @@
                                                     <columns>
                                                         <TableColumn fx:id="stuIDCol" prefWidth="140.0" resizable="false" text="学号" />
                                                         <TableColumn fx:id="stuClassCol" prefWidth="123.0" resizable="false" text="班级" />
-                                                        <TableColumn fx:id="stuNameCol" minWidth="4.0" prefWidth="115.0" resizable="false" text="姓名" />
-                                                        <TableColumn fx:id="stuSexCol" minWidth="0.0" prefWidth="75.0" resizable="false" text="性别" />
+                                                        <TableColumn fx:id="stuNameCol" minWidth="4.0" prefWidth="103.0" resizable="false" text="姓名" />
+                                                        <TableColumn fx:id="stuSexCol" minWidth="0.0" prefWidth="87.0" resizable="false" text="性别" />
                                                         <TableColumn fx:id="stuBirCol" prefWidth="102.0" resizable="false" text="出生日期" />
-                                                        <TableColumn fx:id="stuMajorCol" minWidth="0.0" prefWidth="154.0" resizable="false" text="所在专业" />
+                                                        <TableColumn fx:id="stuMajorCol" minWidth="0.0" prefWidth="170.0" resizable="false" text="所在专业" />
                                                     </columns>
                                                 </TableView>
                                                 <TableView fx:id="courseTableView" editable="true" prefHeight="501.0" prefWidth="738.0" visible="false">
