@@ -16,7 +16,7 @@ public class LoginMain extends Application {
         primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.show();
         primaryStage.setResizable(false);
-        root.getStylesheets().add(getClass().getResource("TableViewTestCss.css").toExternalForm());
+        root.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
     }
 
     public static void main(String[] args) {
