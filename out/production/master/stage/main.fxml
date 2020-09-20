@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
@@ -13,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
     <children>
-        <SplitPane fx:id="splitPane" blendMode="GREEN" dividerPositions="0.2391304347826087" orientation="VERTICAL" prefHeight="671.0" prefWidth="969.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <SplitPane fx:id="splitPane" dividerPositions="0.2391304347826087" orientation="VERTICAL" prefHeight="671.0" prefWidth="969.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                     <children>
@@ -22,8 +23,13 @@
                                 <Font size="48.0" />
                             </font>
                         </Text>
-                        <Button layoutX="659.0" layoutY="73.0" mnemonicParsing="false" onAction="#statistic" prefHeight="40.0" prefWidth="80.0" text="统计学分" />
-                        <Button layoutX="760.0" layoutY="73.0" mnemonicParsing="false" onAction="#analysis" prefHeight="40.0" prefWidth="80.0" text="分析成绩" />
+                        <Button layoutX="659.0" layoutY="73.0" mnemonicParsing="false" onAction="#statistic" prefHeight="40.0" prefWidth="80.0" styleClass="button-common" text="统计学分" />
+                        <Button layoutX="760.0" layoutY="73.0" mnemonicParsing="false" onAction="#analysis" prefHeight="40.0" prefWidth="80.0" styleClass="button-common" text="分析成绩" />
+                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="54.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/image/csu.gif" />
+                     </image>
+                  </ImageView>
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -40,10 +46,10 @@
                                                             <children>
                                                                 <VBox alignment="CENTER" prefHeight="518.0" prefWidth="297.0" spacing="27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
                                                                     <children>
-                                                                        <Button mnemonicParsing="false" onAction="#addStudent" prefHeight="40.0" prefWidth="115.0" text="添加学生" />
-                                                                        <Button mnemonicParsing="false" onAction="#deleteStu" prefHeight="40.0" prefWidth="115.0" text="删除学生" />
-                                                                        <Button mnemonicParsing="false" onAction="#changeStu" prefHeight="40.0" prefWidth="115.0" text="修改信息" />
-                                                                        <Button mnemonicParsing="false" onAction="#queryStu" prefHeight="40.0" prefWidth="115.0" text="查询信息" />
+                                                                        <Button mnemonicParsing="false" onAction="#addStudent" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="添加学生" />
+                                                                        <Button mnemonicParsing="false" onAction="#deleteStu" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="删除学生" />
+                                                                        <Button mnemonicParsing="false" onAction="#changeStu" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="修改信息" />
+                                                                        <Button mnemonicParsing="false" onAction="#queryStu" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="查询信息" />
                                                                     </children>
                                                                     <opaqueInsets>
                                                                         <Insets />
@@ -59,9 +65,9 @@
                                                             <children>
                                                                 <VBox alignment="CENTER" prefHeight="462.0" prefWidth="250.0" spacing="27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <children>
-                                                                        <Button mnemonicParsing="false" onAction="#addCourse" prefHeight="40.0" prefWidth="115.0" text="添加课程" />
-                                                                        <Button mnemonicParsing="false" onAction="#deleteCourse" prefHeight="40.0" prefWidth="115.0" text="删除课程" />
-                                                                        <Button mnemonicParsing="false" onAction="#changeCourse" prefHeight="40.0" prefWidth="115.0" text="修改课程" />
+                                                                        <Button mnemonicParsing="false" onAction="#addCourse" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="添加课程" />
+                                                                        <Button mnemonicParsing="false" onAction="#deleteCourse" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="删除课程" />
+                                                                        <Button mnemonicParsing="false" onAction="#changeCourse" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="修改课程" />
                                                                     </children>
                                                                 </VBox>
                                                             </children>
@@ -74,9 +80,9 @@
                                                             <children>
                                                                 <VBox alignment="CENTER" prefHeight="462.0" prefWidth="250.0" spacing="27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                     <children>
-                                                                        <Button mnemonicParsing="false" onAction="#addScore" prefHeight="40.0" prefWidth="115.0" text="添加成绩" />
-                                                                        <Button mnemonicParsing="false" onAction="#deleteScore" prefHeight="40.0" prefWidth="115.0" text="删除成绩" />
-                                                                        <Button mnemonicParsing="false" onAction="#changeScore" prefHeight="40.0" prefWidth="115.0" text="修改成绩" />
+                                                                        <Button mnemonicParsing="false" onAction="#addScore" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="添加成绩" />
+                                                                        <Button mnemonicParsing="false" onAction="#deleteScore" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="删除成绩" />
+                                                                        <Button mnemonicParsing="false" onAction="#changeScore" prefHeight="40.0" prefWidth="115.0" styleClass="button-common" text="修改成绩" />
                                                                     </children>
                                                                 </VBox>
                                                             </children>

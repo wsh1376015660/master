@@ -30,5 +30,10 @@
 }
 
 .split-pane{
-    -fx-background-image: url("/1.jpg");
+    -fx-background-image: url("/image/background.jpg");
+}
+
+.button-common {
+    -fx-background-color: #5D7BFF;
+    -fx-opacity: 1;
 }
