@@ -526,6 +526,9 @@ public class Controller implements Initializable {
         });
     }
 
+    public void statistic() {
+        
+    }
 //    public void statistic() {
 //        TextInputDialog d = new TextInputDialog();
 //        d.setTitle("统计学分");
@@ -552,6 +555,9 @@ public class Controller implements Initializable {
 //
 //    }
 
+    public void analysis() {
+
+    }
 //    public void analysis() {
 //        Dialog<Pair<String, String>> dialog = new Dialog();
 //        dialog.setTitle("成绩分析");
