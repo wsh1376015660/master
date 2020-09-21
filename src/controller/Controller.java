@@ -526,77 +526,77 @@ public class Controller implements Initializable {
         });
     }
 
-    public void statistic() {
-        TextInputDialog d = new TextInputDialog();
-        d.setTitle("统计学分");
-        d.setHeaderText("请输入要统计学分的学生学号：");
-        d.setContentText("学号:");
-        Optional<String> result = d.showAndWait();
-        if (result.isPresent()) {
-            if (((String)result.get()).trim().equals("")) {
-                return;
-            }
+//    public void statistic() {
+//        TextInputDialog d = new TextInputDialog();
+//        d.setTitle("统计学分");
+//        d.setHeaderText("请输入要统计学分的学生学号：");
+//        d.setContentText("学号:");
+//        Optional<String> result = d.showAndWait();
+//        if (result.isPresent()) {
+//            if (((String)result.get()).trim().equals("")) {
+//                return;
+//            }
+//
+//            if (this.checkIdIllegal((String)result.get())) {
+//                return;
+//            }
+//
+//            int sId = Integer.parseInt((String)result.get());
+//            Student student = (new StudentDaoImpl()).get(sId);
+//            if (student != null) {
+//                this.alert("学分统计", (String)result.get() + student.getStuName() + "的总学分为:" + String.format("%.4s", (new OtherDaoImpl()).statistic(sId)), (String)null, AlertType.INFORMATION);
+//            } else {
+//                this.alert("错误提示", "没有该学生的记录，无法统计！", (String)null, AlertType.ERROR);
+//            }
+//        }
+//
+//    }
 
-            if (this.checkIdIllegal((String)result.get())) {
-                return;
-            }
-
-            int sId = Integer.parseInt((String)result.get());
-            Student student = (new StudentDaoImpl()).get(sId);
-            if (student != null) {
-                this.alert("学分统计", (String)result.get() + student.getStuName() + "的总学分为:" + String.format("%.4s", (new OtherDaoImpl()).statistic(sId)), (String)null, AlertType.INFORMATION);
-            } else {
-                this.alert("错误提示", "没有该学生的记录，无法统计！", (String)null, AlertType.ERROR);
-            }
-        }
-
-    }
-
-    public void analysis() {
-        Dialog<Pair<String, String>> dialog = new Dialog();
-        dialog.setTitle("成绩分析");
-        dialog.setHeaderText("请输入要分析的班级、课程：");
-        DialogPane dialogPane = dialog.getDialogPane();
-        dialogPane.getButtonTypes().addAll(new ButtonType[]{ButtonType.OK, ButtonType.CANCEL});
-        GridPane grid = new GridPane();
-        grid.setHgap(10.0D);
-        grid.setVgap(10.0D);
-        grid.setPadding(new Insets(20.0D, 60.0D, 10.0D, 10.0D));
-        TextField sClass = new TextField();
-        TextField cID = new TextField();
-        grid.add(new Label("班级:"), 0, 0);
-        grid.add(sClass, 1, 0);
-        grid.add(new Label("课程号:"), 0, 1);
-        grid.add(cID, 1, 1);
-        dialog.getDialogPane().setContent(grid);
-        dialog.setResultConverter((button) -> {
-            return button == ButtonType.OK ? new Pair(sClass.getText(), cID.getText()) : null;
-        });
-        Optional<Pair<String, String>> optionalResult = dialog.showAndWait();
-        optionalResult.ifPresent((results) -> {
-            int _class = Integer.parseInt((String)results.getKey());
-            int _cId = Integer.parseInt((String)results.getValue());
-            Course course = (new CourseDaoImpl()).get(_cId);
-            if (course == null) {
-                this.alert("失败提示", "没有这门课，无法分析！", (String)null, AlertType.ERROR);
-            } else {
-                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-                int score_0_60 = (new OtherDaoImpl()).analysis(_class, _cId, 0, 60);
-                int score_60_75 = (new OtherDaoImpl()).analysis(_class, _cId, 60, 75);
-                int score_75_90 = (new OtherDaoImpl()).analysis(_class, _cId, 75, 90);
-                int score_90_100 = (new OtherDaoImpl()).analysis(_class, _cId, 90, 100);
-                int score_100 = (new OtherDaoImpl()).analysis(_class, _cId, 100, 101);
-                String cName = course.getcName();
-                dataset.addValue((double)score_0_60, cName, "0~60");
-                dataset.addValue((double)score_60_75, cName, "60~75");
-                dataset.addValue((double)score_75_90, cName, "75~90");
-                dataset.addValue((double)score_90_100, cName, "90~100");
-                dataset.addValue((double)score_100, cName, "100");
-                this.setChart("成绩直方图", "成绩分布", "人数", dataset);
-            }
-
-        });
-    }
+//    public void analysis() {
+//        Dialog<Pair<String, String>> dialog = new Dialog();
+//        dialog.setTitle("成绩分析");
+//        dialog.setHeaderText("请输入要分析的班级、课程：");
+//        DialogPane dialogPane = dialog.getDialogPane();
+//        dialogPane.getButtonTypes().addAll(new ButtonType[]{ButtonType.OK, ButtonType.CANCEL});
+//        GridPane grid = new GridPane();
+//        grid.setHgap(10.0D);
+//        grid.setVgap(10.0D);
+//        grid.setPadding(new Insets(20.0D, 60.0D, 10.0D, 10.0D));
+//        TextField sClass = new TextField();
+//        TextField cID = new TextField();
+//        grid.add(new Label("班级:"), 0, 0);
+//        grid.add(sClass, 1, 0);
+//        grid.add(new Label("课程号:"), 0, 1);
+//        grid.add(cID, 1, 1);
+//        dialog.getDialogPane().setContent(grid);
+//        dialog.setResultConverter((button) -> {
+//            return button == ButtonType.OK ? new Pair(sClass.getText(), cID.getText()) : null;
+//        });
+//        Optional<Pair<String, String>> optionalResult = dialog.showAndWait();
+//        optionalResult.ifPresent((results) -> {
+//            int _class = Integer.parseInt((String)results.getKey());
+//            int _cId = Integer.parseInt((String)results.getValue());
+//            Course course = (new CourseDaoImpl()).get(_cId);
+//            if (course == null) {
+//                this.alert("失败提示", "没有这门课，无法分析！", (String)null, AlertType.ERROR);
+//            } else {
+//                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+//                int score_0_60 = (new OtherDaoImpl()).analysis(_class, _cId, 0, 60);
+//                int score_60_75 = (new OtherDaoImpl()).analysis(_class, _cId, 60, 75);
+//                int score_75_90 = (new OtherDaoImpl()).analysis(_class, _cId, 75, 90);
+//                int score_90_100 = (new OtherDaoImpl()).analysis(_class, _cId, 90, 100);
+//                int score_100 = (new OtherDaoImpl()).analysis(_class, _cId, 100, 101);
+//                String cName = course.getcName();
+//                dataset.addValue((double)score_0_60, cName, "0~60");
+//                dataset.addValue((double)score_60_75, cName, "60~75");
+//                dataset.addValue((double)score_75_90, cName, "75~90");
+//                dataset.addValue((double)score_90_100, cName, "90~100");
+//                dataset.addValue((double)score_100, cName, "100");
+//                this.setChart("成绩直方图", "成绩分布", "人数", dataset);
+//            }
+//
+//        });
+//    }
 
     public void initialize(URL location, ResourceBundle resources) {
         this.refreshStuTable();

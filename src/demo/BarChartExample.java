@@ -1,4 +1,4 @@
-package util;
+package demo;
 
 import java.util.Arrays;
 import javafx.application.Application;
