@@ -17,6 +17,9 @@ public class RegisterController {
     public Label loginlabel;
     public TextField usernameTextfield;
     public PasswordField passwordField;
+    public Button registerButton;
+    public Label usernameLable1;
+    public ChoiceBox cIDChoiceBox;
     TeacherDaoImpl teacherDaoimpl=new TeacherDaoImpl();
     PasswordChecker passwordChecker = new PasswordChecker();
     RegisterChecker registerChecker = new RegisterChecker();
@@ -28,21 +31,26 @@ public class RegisterController {
     public void register() throws Exception {
         String username=usernameTextfield.getText();
         String password=passwordField.getText();
-        Teacher teacher= new Teacher(username,password,null);
+        String cid = (String) cIDChoiceBox.getValue();
+        Teacher teacher= new Teacher(username,password,cid);
         if(IsValid_register(teacher))
         {
             teacherDaoimpl.register(teacher);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.titleProperty().set("注册成功");
-            alert.headerTextProperty().set("账号:  "+username+"\n密码:  "+password +"\n已注册成功");
+            alert.headerTextProperty().set("账号:  "+username+
+                    "\n密码:  "+ password +
+                    "\n课程编号 "+ cid +
+                    "\n已注册成功");
             alert.showAndWait();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.titleProperty().set("错误提示");
-            alert.headerTextProperty().set("用户名或密码不符合规范"+"" +
+            alert.headerTextProperty().set("注册失败，请仔细阅读以下须知"+"" +
                     "\n用户名必须包含字母和数字(长度6-20)" +
-                    "\n密码必须包含大小写字母、数字、特殊字符（长度8-20");
+                    "\n密码必须包含大小写字母、数字、特殊字符（长度8-20)"+
+                    "\n请确定你选择的课程号");
             alert.showAndWait();
         }
     }
@@ -50,6 +58,7 @@ public class RegisterController {
     public void clear(ActionEvent actionEvent) {
         usernameTextfield.setText("");
         passwordField.setText("");
+        cIDChoiceBox.setValue("1");
     }
 
     public boolean IsValid_register(Teacher teacher) {
