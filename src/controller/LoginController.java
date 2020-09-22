@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import stage.LoginMain;
 import stage.Main;
+import stage.Register;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,6 +47,12 @@ public class LoginController {
             alert.headerTextProperty().set("用户名或密码不正确");
             alert.showAndWait();
         }
+    }
+
+    public void register(ActionEvent actionEvent) throws Exception {
+        Register register=new Register();
+        Stage stage=new Stage();
+        register.start(stage);
     }
 
 

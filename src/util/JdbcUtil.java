@@ -54,7 +54,7 @@ public class JdbcUtil {
     static {
         try {
             Properties p = new Properties();
-            FileInputStream in = new FileInputStream("resource/db.properties");
+            FileInputStream in = new FileInputStream("src/resource/db.properties");
             p.load(in);
             ds = DruidDataSourceFactory.createDataSource(p);
         } catch (Exception var2) {

@@ -12,12 +12,6 @@ import dao.impl.StudentDaoImpl;
 import domain.Course;
 import domain.Score;
 import domain.Student;
-import java.awt.Font;
-import java.net.URL;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -25,21 +19,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Pair;
-import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -48,6 +35,14 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+
+import javax.swing.*;
+import java.awt.*;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML
@@ -116,19 +111,7 @@ public class Controller implements Initializable {
         TextField sSex = new TextField();
         TextField sBirth = new TextField();
         TextField sMajor = new TextField();
-        grid.add(new Label("学号:"), 0, 0);
-        grid.add(sID, 1, 0);
-        grid.add(new Label("班级:"), 0, 1);
-        grid.add(sClass, 1, 1);
-        grid.add(new Label("姓名:"), 0, 2);
-        grid.add(sName, 1, 2);
-        grid.add(new Label("性别:"), 0, 3);
-        grid.add(sSex, 1, 3);
-        grid.add(new Label("出生日期:"), 0, 4);
-        grid.add(sBirth, 1, 4);
-        grid.add(new Label("所在专业:"), 0, 5);
-        grid.add(sMajor, 1, 5);
-        dialog.getDialogPane().setContent(grid);
+        grid_add((Dialog<StudentResults>) dialog, grid, sID, sClass, sName, sSex, sBirth, sMajor);
         dialog.setResultConverter((button) -> {
             return button == ButtonType.OK ? new Controller.StudentResults(sID.getText(), sClass.getText(), sName.getText(), sSex.getText(), sBirth.getText(), sMajor.getText()) : null;
         });
@@ -174,19 +157,7 @@ public class Controller implements Initializable {
                 TextField sSex = new TextField(student.getStuSex());
                 TextField sBirth = new TextField(student.getStuBirth());
                 TextField sMajor = new TextField(student.getStuMajor());
-                grid.add(new Label("学号:"), 0, 0);
-                grid.add(sID, 1, 0);
-                grid.add(new Label("班级:"), 0, 1);
-                grid.add(sClass, 1, 1);
-                grid.add(new Label("姓名:"), 0, 2);
-                grid.add(sName, 1, 2);
-                grid.add(new Label("性别:"), 0, 3);
-                grid.add(sSex, 1, 3);
-                grid.add(new Label("出生日期:"), 0, 4);
-                grid.add(sBirth, 1, 4);
-                grid.add(new Label("所在专业:"), 0, 5);
-                grid.add(sMajor, 1, 5);
-                dialog.getDialogPane().setContent(grid);
+                grid_add((Dialog<StudentResults>) dialog, grid, sID, sClass, sName, sSex, sBirth, sMajor);
                 Optional<Controller.StudentResults> results = dialog.showAndWait();
                 if (results.isPresent()) {
                     Student stu = new Student(sID.getText(), sClass.getText(), sName.getText(), sSex.getText(), sBirth.getText(), sMajor.getText());
@@ -259,25 +230,29 @@ public class Controller implements Initializable {
                 sBirth.setEditable(false);
                 TextField sMajor = new TextField(student.getStuMajor());
                 sMajor.setEditable(false);
-                grid.add(new Label("学号:"), 0, 0);
-                grid.add(sID, 1, 0);
-                grid.add(new Label("班级:"), 0, 1);
-                grid.add(sClass, 1, 1);
-                grid.add(new Label("姓名:"), 0, 2);
-                grid.add(sName, 1, 2);
-                grid.add(new Label("性别:"), 0, 3);
-                grid.add(sSex, 1, 3);
-                grid.add(new Label("出生日期:"), 0, 4);
-                grid.add(sBirth, 1, 4);
-                grid.add(new Label("所在专业:"), 0, 5);
-                grid.add(sMajor, 1, 5);
-                dialog.getDialogPane().setContent(grid);
+                grid_add((Dialog<StudentResults>) dialog, grid, sID, sClass, sName, sSex, sBirth, sMajor);
                 dialog.showAndWait();
             } else {
                 this.alert("错误提示", "没有该学生的记录，无法查询！", (String)null, AlertType.ERROR);
             }
         }
 
+    }
+
+    private void grid_add(Dialog<StudentResults> dialog, GridPane grid, TextField sID, TextField sClass, TextField sName, TextField sSex, TextField sBirth, TextField sMajor) {
+        grid.add(new Label("学号:"), 0, 0);
+        grid.add(sID, 1, 0);
+        grid.add(new Label("班级:"), 0, 1);
+        grid.add(sClass, 1, 1);
+        grid.add(new Label("姓名:"), 0, 2);
+        grid.add(sName, 1, 2);
+        grid.add(new Label("性别:"), 0, 3);
+        grid.add(sSex, 1, 3);
+        grid.add(new Label("出生日期:"), 0, 4);
+        grid.add(sBirth, 1, 4);
+        grid.add(new Label("所在专业:"), 0, 5);
+        grid.add(sMajor, 1, 5);
+        dialog.getDialogPane().setContent(grid);
     }
 
     public void addCourse() {
@@ -414,6 +389,27 @@ public class Controller implements Initializable {
     public void addScore() {
         Dialog<Controller.ScoreResults> dialog = new Dialog();
         dialog.setTitle("添加成绩");
+        dialog_init((Dialog<ScoreResults>) dialog);
+        Optional<ScoreResults> optionalResult = dialog.showAndWait();
+        optionalResult.ifPresent((results) -> {
+            Score score = (new ScoreDaoImpl()).get(Integer.parseInt(results.stuID), Integer.parseInt(results.cID));
+            Course course = (new CourseDaoImpl()).get(Integer.parseInt(results.cID));
+            if (course == null) {
+                this.alert("失败提示", "该门课不存在，无法添加！", (String)null, AlertType.ERROR);
+            } else {
+                if (score != null) {
+                    this.alert("失败提示", "该学生的这门课已有成绩，无法添加！", (String)null, AlertType.ERROR);
+                } else {
+                    (new ScoreDaoImpl()).save(Integer.parseInt(results.stuID), Integer.parseInt(results.cID), new Score(results.stuID, results.cID, results.score, String.format("%.3s", Double.parseDouble(results.score) / 100.0D * (double)Integer.parseInt(course.getcCredit()) + "")));
+                    this.alert("成功提示", "成功保存此门成绩！", (String)null, AlertType.INFORMATION);
+                    this.refreshScoreTable();
+                }
+
+            }
+        });
+    }
+
+    private void dialog_init(Dialog<ScoreResults> dialog) {
         dialog.setHeaderText("请输入对应学号、课程号和成绩：");
         DialogPane dialogPane = dialog.getDialogPane();
         dialogPane.getButtonTypes().addAll(new ButtonType[]{ButtonType.OK, ButtonType.CANCEL});
@@ -432,25 +428,9 @@ public class Controller implements Initializable {
         grid.add(_score, 1, 2);
         dialog.getDialogPane().setContent(grid);
         dialog.setResultConverter((button) -> {
-            return button == ButtonType.OK ? new Controller.ScoreResults(sID.getText(), cID.getText(), _score.getText()) : null;
+            return button == ButtonType.OK ? new ScoreResults(sID.getText(), cID.getText(), _score.getText()) : null;
         });
-        Optional<Controller.ScoreResults> optionalResult = dialog.showAndWait();
-        optionalResult.ifPresent((results) -> {
-            Score score = (new ScoreDaoImpl()).get(Integer.parseInt(results.stuID), Integer.parseInt(results.cID));
-            Course course = (new CourseDaoImpl()).get(Integer.parseInt(results.cID));
-            if (course == null) {
-                this.alert("失败提示", "该门课不存在，无法添加！", (String)null, AlertType.ERROR);
-            } else {
-                if (score != null) {
-                    this.alert("失败提示", "该学生的这门课已有成绩，无法添加！", (String)null, AlertType.ERROR);
-                } else {
-                    (new ScoreDaoImpl()).save(Integer.parseInt(results.stuID), Integer.parseInt(results.cID), new Score(results.stuID, results.cID, results.score, String.format("%.3s", Double.parseDouble(results.score) / 100.0D * (double)Integer.parseInt(course.getcCredit()) + "")));
-                    this.alert("成功提示", "成功保存此门成绩！", (String)null, AlertType.INFORMATION);
-                    this.refreshScoreTable();
-                }
 
-            }
-        });
     }
 
     public void deleteScore() {
@@ -490,27 +470,8 @@ public class Controller implements Initializable {
     public void changeScore() {
         Dialog<Controller.ScoreResults> dialog = new Dialog();
         dialog.setTitle("修改成绩");
-        dialog.setHeaderText("请输入对应学号、课程号和成绩：");
-        DialogPane dialogPane = dialog.getDialogPane();
-        dialogPane.getButtonTypes().addAll(new ButtonType[]{ButtonType.OK, ButtonType.CANCEL});
-        GridPane grid = new GridPane();
-        grid.setHgap(10.0D);
-        grid.setVgap(10.0D);
-        grid.setPadding(new Insets(20.0D, 60.0D, 10.0D, 10.0D));
-        TextField sID = new TextField();
-        TextField cID = new TextField();
-        TextField _score = new TextField();
-        grid.add(new Label("学号:"), 0, 0);
-        grid.add(sID, 1, 0);
-        grid.add(new Label("课程号:"), 0, 1);
-        grid.add(cID, 1, 1);
-        grid.add(new Label("成绩:"), 0, 2);
-        grid.add(_score, 1, 2);
-        dialog.getDialogPane().setContent(grid);
-        dialog.setResultConverter((button) -> {
-            return button == ButtonType.OK ? new Controller.ScoreResults(sID.getText(), cID.getText(), _score.getText()) : null;
-        });
-        Optional<Controller.ScoreResults> optionalResult = dialog.showAndWait();
+        dialog_init((Dialog<ScoreResults>) dialog);
+        Optional<ScoreResults> optionalResult = dialog.showAndWait();
         optionalResult.ifPresent((results) -> {
             Score score = (new ScoreDaoImpl()).get(Integer.parseInt(results.stuID), Integer.parseInt(results.cID));
             Course course = (new CourseDaoImpl()).get(Integer.parseInt(results.cID));
@@ -527,82 +488,76 @@ public class Controller implements Initializable {
     }
 
     public void statistic() {
-        
+        TextInputDialog d = new TextInputDialog();
+        d.setTitle("统计学分");
+        d.setHeaderText("请输入要统计学分的学生学号：");
+        d.setContentText("学号:");
+        Optional<String> result = d.showAndWait();
+        if (result.isPresent()) {
+            if (((String)result.get()).trim().equals("")) {
+                return;
+            }
+
+            if (this.checkIdIllegal((String)result.get())) {
+                return;
+            }
+
+            int sId = Integer.parseInt((String)result.get());
+            Student student = (new StudentDaoImpl()).get(sId);
+            if (student != null) {
+                this.alert("学分统计", (String)result.get() + student.getStuName() + "的总学分为:" + String.format("%.4s", (new OtherDaoImpl()).statistic(sId)), (String)null, AlertType.INFORMATION);
+            } else {
+                this.alert("错误提示", "没有该学生的记录，无法统计！", (String)null, AlertType.ERROR);
+            }
+        }
+
     }
-//    public void statistic() {
-//        TextInputDialog d = new TextInputDialog();
-//        d.setTitle("统计学分");
-//        d.setHeaderText("请输入要统计学分的学生学号：");
-//        d.setContentText("学号:");
-//        Optional<String> result = d.showAndWait();
-//        if (result.isPresent()) {
-//            if (((String)result.get()).trim().equals("")) {
-//                return;
-//            }
-//
-//            if (this.checkIdIllegal((String)result.get())) {
-//                return;
-//            }
-//
-//            int sId = Integer.parseInt((String)result.get());
-//            Student student = (new StudentDaoImpl()).get(sId);
-//            if (student != null) {
-//                this.alert("学分统计", (String)result.get() + student.getStuName() + "的总学分为:" + String.format("%.4s", (new OtherDaoImpl()).statistic(sId)), (String)null, AlertType.INFORMATION);
-//            } else {
-//                this.alert("错误提示", "没有该学生的记录，无法统计！", (String)null, AlertType.ERROR);
-//            }
-//        }
-//
-//    }
 
     public void analysis() {
+        Dialog<Pair<String, String>> dialog = new Dialog();
+        dialog.setTitle("成绩分析");
+        dialog.setHeaderText("请输入要分析的班级、课程：");
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getButtonTypes().addAll(new ButtonType[]{ButtonType.OK, ButtonType.CANCEL});
+        GridPane grid = new GridPane();
+        grid.setHgap(10.0D);
+        grid.setVgap(10.0D);
+        grid.setPadding(new Insets(20.0D, 60.0D, 10.0D, 10.0D));
+        TextField sClass = new TextField();
+        TextField cID = new TextField();
+        grid.add(new Label("班级:"), 0, 0);
+        grid.add(sClass, 1, 0);
+        grid.add(new Label("课程号:"), 0, 1);
+        grid.add(cID, 1, 1);
+        dialog.getDialogPane().setContent(grid);
+        dialog.setResultConverter((button) -> {
+            return button == ButtonType.OK ? new Pair(sClass.getText(), cID.getText()) : null;
+        });
+        Optional<Pair<String, String>> optionalResult = dialog.showAndWait();
+        optionalResult.ifPresent((results) -> {
+            int _class = Integer.parseInt((String)results.getKey());
+            int _cId = Integer.parseInt((String)results.getValue());
+            Course course = (new CourseDaoImpl()).get(_cId);
+            if (course == null) {
+                this.alert("失败提示", "没有这门课，无法分析！", (String)null, AlertType.ERROR);
+            } else {
+                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+                int score_0_60 = (new OtherDaoImpl()).analysis(_class, _cId, 0, 60);
+                int score_60_75 = (new OtherDaoImpl()).analysis(_class, _cId, 60, 75);
+                int score_75_90 = (new OtherDaoImpl()).analysis(_class, _cId, 75, 90);
+                int score_90_100 = (new OtherDaoImpl()).analysis(_class, _cId, 90, 100);
+                int score_100 = (new OtherDaoImpl()).analysis(_class, _cId, 100, 101);
+                String cName = course.getcName();
+                dataset.addValue((double)score_0_60, cName, "0~60");
+                dataset.addValue((double)score_60_75, cName, "60~75");
+                dataset.addValue((double)score_75_90, cName, "75~90");
+                dataset.addValue((double)score_90_100, cName, "90~100");
+                dataset.addValue((double)score_100, cName, "100");
+                this.setChart("成绩直方图", "成绩分布", "人数", dataset);
+            }
 
+        });
     }
-//    public void analysis() {
-//        Dialog<Pair<String, String>> dialog = new Dialog();
-//        dialog.setTitle("成绩分析");
-//        dialog.setHeaderText("请输入要分析的班级、课程：");
-//        DialogPane dialogPane = dialog.getDialogPane();
-//        dialogPane.getButtonTypes().addAll(new ButtonType[]{ButtonType.OK, ButtonType.CANCEL});
-//        GridPane grid = new GridPane();
-//        grid.setHgap(10.0D);
-//        grid.setVgap(10.0D);
-//        grid.setPadding(new Insets(20.0D, 60.0D, 10.0D, 10.0D));
-//        TextField sClass = new TextField();
-//        TextField cID = new TextField();
-//        grid.add(new Label("班级:"), 0, 0);
-//        grid.add(sClass, 1, 0);
-//        grid.add(new Label("课程号:"), 0, 1);
-//        grid.add(cID, 1, 1);
-//        dialog.getDialogPane().setContent(grid);
-//        dialog.setResultConverter((button) -> {
-//            return button == ButtonType.OK ? new Pair(sClass.getText(), cID.getText()) : null;
-//        });
-//        Optional<Pair<String, String>> optionalResult = dialog.showAndWait();
-//        optionalResult.ifPresent((results) -> {
-//            int _class = Integer.parseInt((String)results.getKey());
-//            int _cId = Integer.parseInt((String)results.getValue());
-//            Course course = (new CourseDaoImpl()).get(_cId);
-//            if (course == null) {
-//                this.alert("失败提示", "没有这门课，无法分析！", (String)null, AlertType.ERROR);
-//            } else {
-//                DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//                int score_0_60 = (new OtherDaoImpl()).analysis(_class, _cId, 0, 60);
-//                int score_60_75 = (new OtherDaoImpl()).analysis(_class, _cId, 60, 75);
-//                int score_75_90 = (new OtherDaoImpl()).analysis(_class, _cId, 75, 90);
-//                int score_90_100 = (new OtherDaoImpl()).analysis(_class, _cId, 90, 100);
-//                int score_100 = (new OtherDaoImpl()).analysis(_class, _cId, 100, 101);
-//                String cName = course.getcName();
-//                dataset.addValue((double)score_0_60, cName, "0~60");
-//                dataset.addValue((double)score_60_75, cName, "60~75");
-//                dataset.addValue((double)score_75_90, cName, "75~90");
-//                dataset.addValue((double)score_90_100, cName, "90~100");
-//                dataset.addValue((double)score_100, cName, "100");
-//                this.setChart("成绩直方图", "成绩分布", "人数", dataset);
-//            }
-//
-//        });
-//    }
 
     public void initialize(URL location, ResourceBundle resources) {
         this.refreshStuTable();

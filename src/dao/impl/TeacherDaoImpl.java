@@ -10,6 +10,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class TeacherDaoImpl implements ITeacherDao {
+
+    public int executeUpdate(String sql, Object... params) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            conn = JdbcUtil.getConn();
+            assert conn != null;
+            ps = conn.prepareStatement(sql);
+
+            int i;
+            for(i = 0; i < params.length; ++i) {
+                ps.setObject(i + 1, params[i]);
+            }
+
+            i = ps.executeUpdate();
+            return i;
+        } catch (Exception var9) {
+            var9.printStackTrace();
+        } finally {
+            JdbcUtil.close(conn, ps, null);
+        }
+
+        return 0;
+    }
+
     @Override
     public Teacher get(String username, String password) {
         Connection conn = null;
@@ -39,5 +65,22 @@ public class TeacherDaoImpl implements ITeacherDao {
             JdbcUtil.close(conn, ps, rs);
         }
         return var1;
+    }
+
+    @Override
+    public void register(Teacher var_teacher) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = JdbcUtil.getConn();
+            String sql = "insert into teacher (username,password,cID) VALUES(?,?,?) ";
+            this.executeUpdate(sql,var_teacher.getUsername(),var_teacher.getPassword(),"2");
+        }
+        catch (Exception var) {
+            var.printStackTrace();
+        }
+        finally {
+            JdbcUtil.close(conn, null, null);
+        }
     }
 }
